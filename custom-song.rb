@@ -1,6 +1,7 @@
 use_bpm 75
 
 dear_basketball = "C:/Users/justin_tran/Downloads/Dear Basketball - Kobe Bryant [1978-2020].mp3"
+vocal = "C:/Users/justin_tran/Downloads/Daniel Caesar ft H.E.R - Best Part (AcapellaVocals Only).mp3"
 
 # --- Define the Chord Functions ---
 define :strum do |note, release|
@@ -177,3 +178,7 @@ live_loop :melody do
   end
   stop
 end
+
+sleep 31
+
+sample vocal
