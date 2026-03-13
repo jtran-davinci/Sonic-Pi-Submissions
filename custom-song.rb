@@ -2,56 +2,28 @@ use_bpm 75
 
 dear_basketball = "C:/Users/justin_tran/Downloads/Dear Basketball - Kobe Bryant [1978-2020].mp3"
 vocal = "C:/Users/justin_tran/Downloads/Daniel Caesar ft H.E.R - Best Part (AcapellaVocals Only).mp3"
+vocal_amp = 1
 
-# --- Define the Chord Functions ---
-define :strum do |note, release|
+# Chords
+dmaj7 = [:d3,:a3,:cs4,:fs4]
+am7 = [:a2,:e3,:g3,:c4,:e4]
+gmaj7 = [:g2,:d3,:fs3,:b3]
+bbmaj7 = [:bb2,:f3,:a3,:d3,:f4]
+bbmaj7_2 = [:bb2,:a3,:d4,:g4]
+
+define :strum do |notes, release|
   use_synth :pluck
   
-  with_fx :distortion do
-    play note, attack: 0.01, amp: 0.7, release: release, note_slide: 0.25
+  notes.each do | note |
+    with_fx :distortion do
+      play note, attack: 0.01, amp: 0.7, release: release, note_slide: 0.25
+    end
   end
 end
 
 define :sing do |note, sleep|
   play note, release: 0.75, amp: 0.75
   sleep sleep
-end
-
-define :play_dmaj7 do |release|
-  strum :d3, release
-  strum :a3, release
-  strum :cs4, release
-  strum :fs4, release
-end
-
-define :play_am7 do |release|
-  strum :a2, release
-  strum :e3, release
-  strum :g3, release
-  strum :c4, release
-  strum :e4, release
-end
-
-define :play_gmaj7 do |release|
-  strum :g2, release
-  strum :d3, release
-  strum :fs3, release
-  strum :b3, release
-end
-
-define :play_bbmaj7 do |release|
-  strum :bb2, release
-  strum :f3, release
-  strum :a3, release
-  strum :d3, release
-  strum :f4, release
-end
-
-define :play_bbmaj7_2 do |release|
-  strum :bb2, release
-  strum :a3, release
-  strum :d4, release
-  strum :g4, release
 end
 
 define :guitar_slap do
@@ -63,37 +35,29 @@ end
 
 live_loop :chord do
   4.times do
-    play_dmaj7 1.5
-    sleep 1
-    sleep 0.5
-    
-    play_dmaj7 2
+    strum(dmaj7, 1.5)
     sleep 1.5
-    sleep 1
     
-    play_am7 1.5
-    sleep 1
-    sleep 0.5
+    strum(dmaj7, 2)
+    sleep 2.5
     
-    play_am7 2
+    strum(am7, 1.5)
     sleep 1.5
-    sleep 1
     
-    play_gmaj7 1.5
-    sleep 1
-    sleep 0.5
+    strum(am7, 2)
+    sleep 2.5
     
-    play_gmaj7 2
+    strum(gmaj7, 1.5)
     sleep 1.5
-    sleep 1
     
-    play_bbmaj7 1.5
-    sleep 1
-    sleep 0.5
+    strum(gmaj7, 2)
+    sleep 2.5
     
-    play_bbmaj7_2 2
+    strum(bbmaj7, 1.5)
     sleep 1.5
-    sleep 1
+    
+    strum(bbmaj7_2, 2)
+    sleep 2.5
   end
   stop
 end
@@ -179,6 +143,10 @@ live_loop :melody do
   stop
 end
 
-sleep 31
+sleep 30.5
 
-sample vocal
+4.times do
+  sample vocal, amp: vocal_amp
+  vocal_amp = vocal_amp - 0.25
+  sleep 1
+end
