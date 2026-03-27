@@ -41,9 +41,9 @@ define :guitar_chord do | chord |
   sleep 0.25
 end
 
-define :sing do |note, sleep|
-  play note, release: 0.75, amp: 0.75
-  sleep sleep
+define :sing do |note, duration|
+  play note, release: duration + 0.1, amp: 0.75
+  sleep duration
 end
 
 with_fx :reverb, room: 0.8, mix: 0.5 do
@@ -57,7 +57,42 @@ with_fx :reverb, room: 0.8, mix: 0.5 do
   end
 end
 
-sleep 16
+sleep 12
+
+# flats: g, a, b, d, e
+
+live_loop :vocal do
+  sleep 3.75
+  sing 64, 0.25
+  
+  # measure 1
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 62, 0.25
+  sing 60, 0.25
+  sing 55, 1.5
+  sing 60, 0.25
+  sing 69, 0.25
+  sing 64, 4.25
+  
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 64, 0.25
+  sing 62, 0.25
+  sing 60, 0.25
+  sing 57, 1.5
+  sing 60, 0.25
+  sing 67, 0.25
+  sing 59, 4.25
+  stop
+end
+
+sleep 4
 
 live_loop :piano do
   use_synth :piano
@@ -65,14 +100,10 @@ live_loop :piano do
   sleep 4
   play_chord D7, amp: 3, hard: 0.5, release: 4
   sleep 4
-  play_chord F, amp: 3, hard: 0.5, release: 4
+  play_chorwd F, amp: 3, hard: 0.5, release: 4
   sleep 4
   play_chord Cmaj7, amp: 3, hard: 0.5, release: 4
   sleep 4
-end
-
-live_loop :vocal do
-  
 end
 
 sleep 16
@@ -98,7 +129,7 @@ live_loop :drums do
   sample :drum_snare_soft, amp: 0.4
   sleep 0.5
   
-  sample :drum_cymbal_closed, amp: 1
+  sample :drum_cymbal_closed, amp: 0.75
   sample :drum_snare_soft, amp: 0.6
   sleep 0.5
   
@@ -114,7 +145,7 @@ live_loop :drums do
   sample :drum_snare_soft, amp: 0.4
   sleep 0.5
   
-  sample :drum_cymbal_closed, amp: 1
+  sample :drum_cymbal_closed, amp: 0.75
   
   
   sample :drum_snare_soft, amp: 0.6
